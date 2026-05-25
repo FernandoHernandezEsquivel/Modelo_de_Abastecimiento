@@ -1,11 +1,11 @@
 # 🏦 Modelo de Abastecimiento de Efectivo - Banco del Bienestar
 
 > **Documentación completa del modelo**
- 
+> 
 > Autor: Fernando Hernández Esquivel
-
+>
 > Fecha: Mayo 2026
-
+>
 > Versión: 1.0.0
 
 ---
@@ -96,30 +96,41 @@ flowchart LR
     ENVIO --> REPORTE
     REPORTE --> FIN([Fin])
 ```
----
-
 ## 🗂️ Estructura del Proyecto
 
 ```markdown
-modelo_abastecimiento_bienestar/
+Modelo_de_Abastecimiento/
 │
-├── README.md ← Este archivo
-├── abastecimiento.py ← Código principal
-├── scheduler.py ← Automatización
-├── requirements.txt ← Dependencias
+├── README.md
+├── Modelos_Abastecimiento_Banco_Bienestar.ipynb
+├── scheduler.py
+├── requirements.txt
 │
 ├── data/
 │ ├── Sucursales_Banco_Bienestar.csv
-│ └── datos_historicos.csv
+│ ├─- datos_historicos.csv
+│ │── poblacion_por_estado.csv
+│ │── Mapa_distribucion_sucursales.qgz
+│ │── E008_MIR_2026.pdf
+│ └── F001_FIME_2026.pdf
 │
 ├── outputs/
+│ ├── analisis_eoq.csv
+│ ├── comparacion_modelos.csv
+│ │── estadisticas.csv
+│ │── importancia_random_forest.csv
 │ ├── plan_abastecimiento.csv
-│ ├── reporte_estadistico.xlsx
-│ └── grafica_demanda.png
+│ │── pronostico_holt_winters.csv
+│ │── pronostico_random_forest.csv
+│ ├── Comparacion_pronosticos.png
+│ │── Demanda_por_entidad.png
+│ │── Distribución_sucursales.png
+│ └── Grafica_demanda.png
 │
-└── docs/
-├── diagrama_flujo.png
-└── presentacion_ejecutiva.pdf
+├── docs/
+│ ├── guia_usuario.md
+│ └── Markdown_Modelo
+
 ```
 ---
 
@@ -161,8 +172,8 @@ modelo_abastecimiento_bienestar/
 
 ### Paso 1: Clonar el repositorio
 ```bash
-git clone [URL-del-repositorio]
-cd modelo_abastecimiento_bienestar
+git clone https://github.com/FernandoHernandezEsquivel/Modelo_de_Abastecimiento
+cd Modelo_de_Abastecimiento
 ```
 ### Paso 2: Instalar dependencias
 ```bash
@@ -171,7 +182,7 @@ pip install -r requirements.txt
 
 ### Paso 3: Ejecutar el modelo
 ```bash
-python abastecimiento.py
+python Modelos_Abastecimiento_Banco_Bienestar.ipynb
 ```
 
 ### Paso 4: (Opcional) Iniciar automatización
@@ -194,7 +205,7 @@ schedule>=1.2.0
 
 Ejecución manual
 ```bash
-python abastecimiento.py
+python Modelos_Abastecimiento_Banco_Bienestar.ipynb
 ```
 
 Ejecución programada
@@ -212,8 +223,10 @@ Tiempos de ejecución
 |Limpieza y ETL | ~10 seg |
 |Modelo Holt-Winters |~15 seg |
 |Modelo Random Forest |   ~30 seg |
+|Modelo EOQ |~10 seg |
 |Generación de reportes | ~10 seg |
-|Total |  ~70 seg |
+|Generación de gráficos | ~10 seg |
+|Total |  ~90 seg |
 
 ---
 
@@ -221,9 +234,9 @@ Tiempos de ejecución
 
 | Métrica | Valor | Interpretación |
 |---------|-------|----------------|
-| MAPE | 8.5% | ✅ Excelente precisión |
-| RMSE | $12,300,000 | Error promedio en pesos |
-| R² (Random Forest) | 0.87 | Explica 87% de variabilidad |
+| MAPE | 3.74% | ✅ Excelente precisión |
+| RMSE | $680,267 | Error promedio en pesos |
+| R² (Random Forest) | 0.9852 | Explica 98.5% de variabilidad |
 | Tasa de acierto en picos | 94% | Buen desempeño |
 
 ### Últimas ejecuciones
@@ -260,11 +273,11 @@ Tiempos de ejecución
 
 | Entidad | Sucursales | Demanda semanal | Envío recomendado |
 |---------|------------|-----------------|-------------------|
-| Ciudad de México | 45 | $450,000,000 | $480,000,000 |
-| Estado de México | 38 | $380,000,000 | $400,000,000 |
-| Veracruz | 52 | $420,000,000 | $440,000,000 |
-| Jalisco | 48 | $390,000,000 | $410,000,000 |
-| Puebla | 35 | $280,000,000 | $300,000,000 |
+| Ciudad de México | 88 | $10,229,586 | $5,900,000 |
+| Estado de México | 279 | $17,852,222 | $7,200,000 |
+| Veracruz | 292 | $8,483,341 | $0 |
+| Jalisco | 152 | $8,595,843 | $5,000,000 |
+| Puebla | 261 | $6,884,597 | $0 |
 
 ---
 
@@ -302,9 +315,12 @@ Tiempos de ejecución
 ## 👤 Contacto
 
 **Autor:** Fernando Hernández Esquivel
+
 **Rol:** Data Science (Documentador)
+
 **Email:** fehees@hotmail.com
-**GitHub:** [github.com/tuusuario]
+
+**GitHub:** github.com/FernandoHernandezEsquivel
 
 ---
 
@@ -337,7 +353,7 @@ Módulo de Automatización del Pipeline de Abastecimiento
 Este script programa la ejecución automática del modelo
 en horarios específicos, simulando un orquestador de pipelines.
 
-Autor: [Tu Nombre]
+Autor: Fernando Hernández Esquivel
 Fecha: Mayo 2026
 """
 
